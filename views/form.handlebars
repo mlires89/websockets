@@ -1,0 +1,61 @@
+<h2 class="px-5 mt-1">Agregar Producto</h2>
+<div class='container mt-5'>
+    <div class='row'>
+        <div class='col'>
+             <form action="/productos" method="post">  
+                <div class='mb-3'>
+                    <label class='form-label'>Nombre del Producto</label>
+                    <input class='form-control' id='title' name="title" />
+                </div>
+                <div class='mb-3'>
+                    <label class='form-label'>Precio</label>
+                    <input class='form-control' id='price' name="price" />
+                </div>
+                <div class='mb-3'>
+                    <label class='form-label'>URL de la imagen</label>
+                    <input class='form-control' id='thumbnail' name="thumbnail"/>
+                </div>
+                <button type='submit' class='btn btn-primary'>Guardar</button>
+            </form> 
+        </div>
+    </div>
+</div>
+
+
+<h2 class="px-5 mt-1">Productos</h2>
+
+    
+    <div class='container mt-5'>
+        <div class='row'>
+            <div class='col'>
+                <table class='table'>
+                    <thead class='table-dark'>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
+                    </thead>
+                    <tbody id="tbdy"> 
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+    <h2 class="text-primary text-center">Centro de mensajes</h2>
+        <div>
+            <form onsubmit="return addMessage(this)">
+                <input type="text" id="username" placeholder="Nombre">
+                <div id="messages"></div>
+                <input type="text" id="texto" placeholder="Mensaje">
+                <input class="btn btn-dark" type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../main.js"></script>
