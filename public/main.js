@@ -16,7 +16,7 @@ const render=(data)=>{
     const ps = data.products.map((p)=>{
         return(`<tr>    
                     <td>${p.id}</td>
-                    <td>{${p.title}</td>
+                    <td>${p.title}</td>
                     <td>${p.price}</td>
                     <td><img src="${p.thumbnail}" height="30px"></td>
                 </tr>`)
@@ -27,14 +27,16 @@ const render=(data)=>{
 
 
 const addMessage=(e)=>{
-    let fecha = new Date().toLocaleDateString()+ ' ' +new Date().toTimeString()
-    let fyh = fecha.split(' ');
-    const mensaje = {
+    
+    const fecha = new Date().toLocaleDateString()+ ' ' +new Date().toTimeString()
+    const fyh = fecha.split(' ');
+    let mensaje = {
         author:document.getElementById('username').value,
         text:document.getElementById('texto').value,
         date:fyh[0]+' '+fyh[1]
     }
 
+    console.log("hola")
     socket.emit('new-message',mensaje);
     limpiarInput()
     return false;

@@ -16,7 +16,7 @@ router.get('/productos', async (req, res) => {
 
 router.post('/productos', (req, res) => {
   contenedor.save(req.body)
-  res.redirect('/productos')
+  res.redirect('/')
 })
 
 module.exports = router;

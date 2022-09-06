@@ -12,26 +12,6 @@ const io = new IOServer(httpServer)
 
 let messages = []
 
-const prodTest = [
-    {  
-      title:"Escuadra",
-      price:123.45,
-      thumbnail:"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
-      id:1
-    },
-    {
-      title:"Calculadora",
-      price:234.56,
-      thumbnail:"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
-      id:2
-    },
-    {
-      title:"Globo Terráqueo",
-      price:345.67,
-      thumbnail:"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
-      id:4
-    }
-  ]
 
 const server = httpServer.listen(PORT, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
@@ -43,20 +23,21 @@ server.on('error',(err)=>{
   console.log(err)
   })
 
-io.on('connection',(socket)=>{
+io.on('connection',async (socket)=>{
   console.log('se conecto un cliente')
-  socket.emit('messages',{messages,products:prodTest})
+  const productos = await contenedor.getData()
+  socket.emit('messages',{messages,products:productos})
 
   socket.on('new-message',(data)=>{
       messages=[...messages,data]
       console.log(messages)
-      let todo ={messages:messages,products:prodTest}
+      let todo ={messages:messages,products:productos}
       io.sockets.emit('messages',todo)
   })
-  socket.on('new-product', (data)=>{
-    console.log(data)
-    contenedor.save(data)
-    let todo ={messages:messages,products:prodTest}
+  socket.on('new-product',async (data)=>{
+    await contenedor.save(data)
+    const productos = await contenedor.getData()    
+    let todo ={messages:messages,products:productos}
     io.sockets.emit('messages',todo)
   })
   
